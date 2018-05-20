@@ -1,12 +1,14 @@
+//use std::cmp::Ordering;
+
 pub struct Node {
     right: Option<Box<Node>>,
     left: Option<Box<Node>>,
-    character: char,
+    character: u8,
     frequency: u64,
 }
 
 impl Node {
-    pub fn new_leaf(character: char, frequency: u64) -> Node {
+    pub fn new_leaf(character: u8, frequency: u64) -> Node {
         Node {
             right: None,
             left: None,
@@ -20,7 +22,7 @@ impl Node {
         Node {
             right: Some(Box::new(right)),
             left: Some(Box::new(left)),
-            character: '\0',
+            character: 0,
             frequency: freq
         }
     }
@@ -39,7 +41,7 @@ impl Node {
         }
     }
 
-    pub fn character(&self) -> char {
+    pub fn character(&self) -> u8 {
         self.character
     }
 
@@ -55,3 +57,25 @@ impl Node {
         self.right.is_some() || self.left.is_some()
     }
 }
+/*
+
+impl Ord for Node {
+    fn cmp(&self, other: &Node) -> Ordering {
+        self.frequency.cmp(&other.frequency)
+    }
+}
+
+impl PartialOrd for Node {
+    fn partial_cmp(&self, other: &Node) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl PartialEq for Node {
+    fn eq(&self, other: &Node) -> bool {
+        self.frequency == other.frequency
+    }
+}
+
+impl Eq for Node {}
+*/
